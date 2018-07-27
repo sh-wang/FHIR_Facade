@@ -1,5 +1,6 @@
 package guru.springframework.controllers;
 
+
 import org.springframework.stereotype.Controller;
 import guru.springframework.conversion.PatientConversion;
 import org.springframework.ui.Model;
@@ -21,4 +22,7 @@ public class PatientController {
         model.addAttribute(temp.ConvertResponse());
         return "patientResource";
     }
+
+
+
 }
