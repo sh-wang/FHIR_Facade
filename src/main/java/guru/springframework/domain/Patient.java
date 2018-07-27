@@ -8,13 +8,12 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String birthdate;
     private String email;
     private String family;
     private String gender;
     private String given;
-    private String identifier;
+    private Long identifier;
     private String name;
 
 
@@ -66,11 +65,11 @@ public class Patient {
         this.given = given;
     }
 
-    public String getIdentifier() {
+    public Long getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(String identifier) {
+    public void setIdentifier(Long identifier) {
         this.identifier = identifier;
     }
 
