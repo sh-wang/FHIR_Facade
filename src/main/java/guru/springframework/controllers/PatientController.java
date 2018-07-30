@@ -44,6 +44,14 @@ public class PatientController {
         return "index";
     }
 
+    @RequestMapping("patient")
+    public String newProduct(Model model, Integer id){
+        model.addAttribute("patient", new Patient());
+        RetrieveData temp = new RetrieveData("http://localhost:8080/api/patients/"+id);
+        System.out.println(temp.ConvertResponse());
+        return "patientform";
+    }
+
 
 
 }
