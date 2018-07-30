@@ -1,8 +1,8 @@
 package guru.springframework.controllers;
 
 
-import guru.springframework.domain.Patient;
 import org.springframework.stereotype.Controller;
+import guru.springframework.domain.Patient;
 import guru.springframework.conversion.PatientConversion;
 import org.springframework.ui.Model;
 import guru.springframework.conversion.PatientConversion;
