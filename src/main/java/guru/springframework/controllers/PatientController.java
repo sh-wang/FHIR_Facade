@@ -48,13 +48,8 @@ public class PatientController {
     @RequestMapping("/patient")
     public String newProduct(Model model, Integer id){
         model.addAttribute("patient", new Patient());
-<<<<<<< HEAD
-        RetrieveData temp = new RetrieveData("http://localhost:8080/api/patients/"+id);
-        model.addAttribute("patientresource",temp.ConvertResponse());
-=======
         temp.setUrl("http://localhost:8080/api/patients/"+id);
         model.addAttribute("patientresource",temp.convertPatient());
->>>>>>> 0a0af1b5cdff60409dd86193fb032fbf7e41c965
         return "patientform";
     }
 
