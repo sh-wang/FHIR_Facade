@@ -11,21 +11,11 @@ public class RetrieveData {
     public RetrieveData(String url){
         this.url=url;
     }
+    public RetrieveData(){};
 
-    public String ConvertResponse() {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response;
-        try {
-            response = restTemplate.getForEntity(url, String.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("url error, please type the correct url");
-            return null;
-        }
-
-        String answer = "";
-        String newUrl = url.substring(url.indexOf("api") + 4);
+    private boolean urlCheck(String url){
         Boolean isArray;
+        String newUrl = url.substring(url.indexOf("api") + 4);
         if (newUrl.contains("/")){
             isArray = false;
             newUrl = newUrl.substring(0, newUrl.lastIndexOf("/"));
@@ -35,50 +25,116 @@ public class RetrieveData {
                 newUrl = newUrl.substring(0, newUrl.lastIndexOf("?"));
             }
         }
+        return isArray;
+    }
+
+
+    private ResponseEntity<String> getResponse(String url){
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response;
+        try {
+            response = restTemplate.getForEntity(url, String.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("url error, please type the correct url");
+            return null;
+        }
+        return response;
+    }
+
+
+    public String convertPatient(){
+        ResponseEntity<String> response = getResponse(url);
+        if (response == null){
+            return "no information";
+        }
+
+        String answer;
+        Boolean isArray = urlCheck(url);
 
         if (isArray) {
-            switch (newUrl) {
-                case "patients":
-                    answer = patientConversion.conversionArray(response.getBody());
-                    break;
-//                case "procedures":
-//                    answer = procedureConversion.conversionArray(response.getBody());
-//                    break;
-//                case "questionnaires":
-//                    answer = questionnaireConversion.conversionArray(response.getBody());
-//                    break;
-//                case "followup-actions":
-//                    answer = questionnaireResponseConversion.conversionArray(response.getBody());
-//                    break;
-//                case "Questionnaire-response":
-//                    answer = questionnaireResponseConversion.conversionArray(response.getBody());
-//                    break;
-//                default:
-//                    answer = "[]";
-//                    break;
-            }
+            answer = patientConversion.conversionArray(response.getBody());
         } else {
-            switch (newUrl) {
-                case "patients":
-                    answer = patientConversion.conversionSingle(response.getBody());
-                    break;
-//                case "procedures":
-//                    answer = procedureConversion.conversionSingle(response.getBody());
-//                    break;
-//                case "questionnaires":
-//                    answer = questionnaireConversion.conversionSingle(response.getBody());
-//                    break;
-//                case "followup-actions":
-//                    answer = questionnaireResponseConversion.conversionSingle(response.getBody());
-//                    break;
-//                case "Questionnaire-response":
-//                    answer = questionnaireResponseConversion.conversionSingle(response.getBody());
-//                    break;
-//                default:
-//                    answer = "[]";
-//                    break;
-            }
+            answer = patientConversion.conversionSingle(response.getBody());
         }
         return answer;
+
+    }
+//    public String ConvertResponse() {
+//        RestTemplate restTemplate = new RestTemplate();
+//        ResponseEntity<String> response;
+//        try {
+//            response = restTemplate.getForEntity(url, String.class);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            System.out.println("url error, please type the correct url");
+//            return null;
+//        }
+//
+//        String answer = "";
+//        String newUrl = url.substring(url.indexOf("api") + 4);
+//        Boolean isArray;
+//        if (newUrl.contains("/")){
+//            isArray = false;
+//            newUrl = newUrl.substring(0, newUrl.lastIndexOf("/"));
+//        } else {
+//            isArray = true;
+//            if (newUrl.contains("?")){
+//                newUrl = newUrl.substring(0, newUrl.lastIndexOf("?"));
+//            }
+//        }
+//
+//        if (isArray) {
+//            switch (newUrl) {
+//                case "patients":
+//                    answer = patientConversion.conversionArray(response.getBody());
+//                    break;
+////                case "procedures":
+////                    answer = procedureConversion.conversionArray(response.getBody());
+////                    break;
+////                case "questionnaires":
+////                    answer = questionnaireConversion.conversionArray(response.getBody());
+////                    break;
+////                case "followup-actions":
+////                    answer = questionnaireResponseConversion.conversionArray(response.getBody());
+////                    break;
+////                case "Questionnaire-response":
+////                    answer = questionnaireResponseConversion.conversionArray(response.getBody());
+////                    break;
+////                default:
+////                    answer = "[]";
+////                    break;
+//            }
+//        } else {
+//            switch (newUrl) {
+//                case "patients":
+//                    answer = patientConversion.conversionSingle(response.getBody());
+//                    break;
+////                case "procedures":
+////                    answer = procedureConversion.conversionSingle(response.getBody());
+////                    break;
+////                case "questionnaires":
+////                    answer = questionnaireConversion.conversionSingle(response.getBody());
+////                    break;
+////                case "followup-actions":
+////                    answer = questionnaireResponseConversion.conversionSingle(response.getBody());
+////                    break;
+////                case "Questionnaire-response":
+////                    answer = questionnaireResponseConversion.conversionSingle(response.getBody());
+////                    break;
+////                default:
+////                    answer = "[]";
+////                    break;
+//            }
+//        }
+//        return answer;
+//    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
