@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class PatientController {
     private PatientConversion patientConversion;
+    private RetrieveData temp = new RetrieveData();
 
     public void setPatientConversion(PatientConversion patientConversion) {
         this.patientConversion = patientConversion;
@@ -37,18 +38,18 @@ public class PatientController {
     @RequestMapping("/patient/{id}")
     public String convertPatient(@PathVariable Long id){
         RetrieveData temp = new RetrieveData("http://localhost:8080/api/patients/"+id);
-        System.out.println(temp.ConvertResponse());
+        System.out.println(temp.convertPatient());
 //        model.addAttribute("patient", temp.ConvertResponse());
         System.out.println("我心态崩了aaaaaaa");
 
         return "index";
     }
 
-    @RequestMapping("patient")
+    @RequestMapping("/patient")
     public String newProduct(Model model, Integer id){
         model.addAttribute("patient", new Patient());
-        RetrieveData temp = new RetrieveData("http://localhost:8080/api/patients/"+id);
-        model.addAttribute("patientresource",temp.ConvertResponse());
+        temp.setUrl("http://localhost:8080/api/patients/"+id);
+        model.addAttribute("patientresource",temp.convertPatient());
         return "patientform";
     }
 
