@@ -18,43 +18,60 @@ public class QuestionnaireConversion {
     private String defaultPath = "http://localhost:8080/api/";
 
 
-    public String conversionSingle(String rawData) throws JSONException {
-        JSONObject jsonObject = new JSONObject(rawData);
+    public String conversionSingle(String rawData){
+        try {
+            JSONObject jsonObject = new JSONObject(rawData);
 
-        Questionnaire questionnaire = questionnaireConversion(jsonObject);
-        String encode = p.encodeResourceToString(questionnaire);
 
-        return encode;
-    }
-    public String conversionArray(String rawData) throws JSONException {
-        JSONArray jsonArray = new JSONArray(rawData);
-        JSONArray FHIRarray = new JSONArray();
+            Questionnaire questionnaire = questionnaireConversion(jsonObject);
+            String encode = p.encodeResourceToString(questionnaire);
 
-        for(int i = 0; i < jsonArray.length(); i++){
-            FHIRarray.put(new JSONObject(p.encodeResourceToString
-                    (questionnaireConversion(jsonArray.getJSONObject(i)))));
+            return encode;
+        }catch (JSONException e){
+            e.printStackTrace();
+            return "conversion error";
         }
 
-        return FHIRarray.toString();
+    }
+    public String conversionArray(String rawData){
+        try {
+            JSONArray jsonArray = new JSONArray(rawData);
+            JSONArray FHIRarray = new JSONArray();
+
+            for(int i = 0; i < jsonArray.length(); i++){
+                FHIRarray.put(new JSONObject(p.encodeResourceToString
+                        (questionnaireConversion(jsonArray.getJSONObject(i)))));
+            }
+
+            return FHIRarray.toString();
+        } catch (JSONException e){
+            e.printStackTrace();
+            return "conversion error";
+        }
     }
 
-    public Questionnaire questionnaireConversion(JSONObject jsonObject) throws JSONException {
+    public Questionnaire questionnaireConversion(JSONObject jsonObject){
         Questionnaire questionnaire = new Questionnaire();
 
-        //add url
-        questionnaire.setUrl(defaultPath + "questionnaires/"+jsonObject.get("id"));
+        try {
+            //add url
+            questionnaire.setUrl(defaultPath + "questionnaires/"+jsonObject.get("id"));
 
-        //add id
-        questionnaire.setId(jsonObject.get("id").toString());
+            //add id
+            questionnaire.setId(jsonObject.get("id").toString());
 
-        //add Status
-        questionnaire.setStatus(Enumerations.PublicationStatus.ACTIVE);
+            //add Status
+            questionnaire.setStatus(Enumerations.PublicationStatus.ACTIVE);
 
-        //add name
-        questionnaire.setName(jsonObject.get("name").toString());
+            //add name
+            questionnaire.setName(jsonObject.get("name").toString());
 
-        //add Copyright
-        questionnaire.setCopyright(jsonObject.get("copyright").toString());
+            //add Copyright
+            questionnaire.setCopyright(jsonObject.get("copyright").toString());
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
         return  questionnaire;
     }
 }

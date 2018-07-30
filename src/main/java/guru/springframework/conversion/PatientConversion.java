@@ -2,21 +2,17 @@ package guru.springframework.conversion;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
-import com.google.gson.JsonObject;
 import org.hl7.fhir.dstu3.model.ContactPoint;
 import org.hl7.fhir.dstu3.model.Enumerations;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PatientConversion {
 
@@ -28,38 +24,31 @@ public class PatientConversion {
     private String defaultPath = "http://localhost:8080/api/";
 
     public String conversionSingle(String rawData){
-        JSONObject jsonObject = null;
         try {
-            jsonObject = new JSONObject(rawData);
-        } catch (JSONException e) {
+            JSONObject jsonObject = new JSONObject(rawData);
+            Patient patient = patientConversion(jsonObject);
+            String encode = p.encodeResourceToString(patient);
+            return encode;
+        } catch (JSONException e){
             e.printStackTrace();
+            return "conversion error";
         }
-
-        Patient patient = patientConversion(jsonObject);
-        String encode = p.encodeResourceToString(patient);
-
-        return encode;
     }
 
     public String conversionArray(String rawData) {
-        JSONArray jsonArray = null;
         try {
-            jsonArray = new JSONArray(rawData);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JSONArray FHIRarray = new JSONArray();
+            JSONArray jsonArray = new JSONArray(rawData);
+            JSONArray FHIRarray = new JSONArray();
 
-        for(int i = 0; i < jsonArray.length(); i++){
-            try {
+            for(int i = 0; i < jsonArray.length(); i++){
                 FHIRarray.put(new JSONObject(p.encodeResourceToString
                         (patientConversion(jsonArray.getJSONObject(i)))));
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+            return FHIRarray.toString();
+        }catch (JSONException e){
+            e.printStackTrace();
+            return "conversion error";
         }
-
-        return FHIRarray.toString();
     }
 
     public Patient patientConversion(JSONObject jsonObject){
