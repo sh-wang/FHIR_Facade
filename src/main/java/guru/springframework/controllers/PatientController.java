@@ -48,7 +48,8 @@ public class PatientController {
     public String newProduct(Model model, Integer id){
         model.addAttribute("patient", new Patient());
         RetrieveData temp = new RetrieveData("http://localhost:8080/api/patients/"+id);
-        System.out.println(temp.ConvertResponse());
+        System.out.println("1:"+temp.ConvertResponse());
+        model.addAttribute("patientresource",temp.ConvertResponse());
         return "patientform";
     }
 
