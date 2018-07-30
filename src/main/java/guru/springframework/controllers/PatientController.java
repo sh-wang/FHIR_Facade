@@ -21,12 +21,13 @@ public class PatientController {
     }
 
 //<<<<<<< HEAD
-//    @RequestMapping("/patient")
-//    public String newPatient(Model model){
-//        model.addAttribute("patient", new Patient());
+    @RequestMapping("/patient/new")
+    public String newPatient(Model model){
+        model.addAttribute("patient", new Patient());
 //        System.out.println("我心态崩了");
-//        return "patientform";
-//    }
+        System.out.println(model.asMap().get("patient"));
+        return "patientform";
+    }
 
 //    @RequestMapping(value = "/patient", method = RequestMethod.POST)
 //    public String saveProduct(Patient patient){
