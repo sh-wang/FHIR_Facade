@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PatientController {
     private PatientConversion patientConversion;
     private RetrieveData temp = new RetrieveData();
-
+    private String defaultUrl="http://localhost:8080/api/patients?";
+    private String queryUrl = "";
     public void setPatientConversion(PatientConversion patientConversion) {
         this.patientConversion = patientConversion;
     }
@@ -40,15 +41,18 @@ public class PatientController {
         RetrieveData temp = new RetrieveData("http://localhost:8080/api/patients/"+id);
         System.out.println(temp.convertPatient());
 //        model.addAttribute("patient", temp.ConvertResponse());
-        System.out.println("我心态崩了aaaaaaa");
 
         return "index";
     }
 
     @RequestMapping("/patient")
-    public String newProduct(Model model, Integer id, String birthdate, String email, String family, String gender, String given, Long identifier, String name){
+    public String newProduct(Model model, String birthdate, String email, String family, String gender, String given, Long identifier, String name){
         model.addAttribute("patient", new Patient());
-        temp.setUrl("http://localhost:8080/api/patients/"+id);
+
+        if(birthdate!=null){
+            queryUrl = queryUrl + "id="+birthdate;
+        }
+        temp.setUrl("http://localhost:8080/api/patients/"+);
         model.addAttribute("patientresource",temp.convertPatient());
         return "patientform";
     }
