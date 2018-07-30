@@ -13,7 +13,7 @@ public class Patient {
     private String family;
     private String gender;
     private String given;
-    private Long identifier;
+    private String identifier;
     private String name;
 
 
@@ -65,11 +65,11 @@ public class Patient {
         this.given = given;
     }
 
-    public Long getIdentifier() {
+    public String getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(Long identifier) {
+    public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
 
