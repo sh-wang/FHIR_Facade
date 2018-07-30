@@ -46,7 +46,7 @@ public class PatientController {
     }
 
     @RequestMapping("/patient")
-    public String newProduct(Model model, Integer id){
+    public String newProduct(Model model, Integer id, String birthdate, String email, String family, String gender, String given, Long identifier, String name){
         model.addAttribute("patient", new Patient());
         temp.setUrl("http://localhost:8080/api/patients/"+id);
         model.addAttribute("patientresource",temp.convertPatient());
