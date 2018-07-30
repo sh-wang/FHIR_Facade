@@ -18,11 +18,17 @@ public class QuestionnaireResponseController {
     }
 
     @RequestMapping("/questionnaireresponse")
-    public String newProduct(Model model, Integer identifier){
+    public String newProduct(Model model, Integer identifier
+                            , String parent,
+                             String questionnaire, String status,
+                             String patient, String subject,
+                             String authored, String author
+    ){
         model.addAttribute("qr", new QuestionnaireResponse());
+        System.out.println("qq:"+status);
         temp.setUrl("http://localhost:8080/api/Questionnaire-response/"+identifier);
-        model.addAttribute("qrsource",temp.convertPatient());
-        System.out.println(temp.convertPatient());
+        System.out.println(temp.convertQuestionnnaireResponse());
+        model.addAttribute("qrsource",temp.convertQuestionnnaireResponse());
         return "qrgetit";
     }
 }
