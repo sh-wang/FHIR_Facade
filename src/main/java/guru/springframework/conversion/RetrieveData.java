@@ -55,7 +55,7 @@ public class RetrieveData {
         if (isArray) {
             answer = patientConversion.conversionArray(response.getBody());
         } else {
-            answer = patientConversion.conversionSingle(response.getBody());
+            answer = patientConversion.conversionArray(response.getBody());
         }
         return answer;
 
