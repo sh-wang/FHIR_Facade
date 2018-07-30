@@ -21,35 +21,12 @@ public class PatientController {
         this.patientConversion = patientConversion;
     }
 
-//<<<<<<< HEAD
-    @RequestMapping("/patient/new")
-    public String newPatient(Model model){
-        model.addAttribute("patient", new Patient());
-//        System.out.println("我心态崩了");
-        System.out.println(model.asMap().get("patient"));
-        return "patientform";
-    }
-
-//    @RequestMapping(value = "/patient", method = RequestMethod.POST)
-//    public String saveProduct(Patient patient){
-//        return "";
-//    }
-
-    @RequestMapping("/patient/{id}")
-    public String convertPatient(@PathVariable Long id){
-        RetrieveData temp = new RetrieveData("http://localhost:8080/api/patients/"+id);
-        System.out.println(temp.convertPatient());
-//        model.addAttribute("patient", temp.ConvertResponse());
-        System.out.println("我心态崩了aaaaaaa");
-
-        return "index";
-    }
-
     @RequestMapping("/patient")
     public String newProduct(Model model, Integer id){
         model.addAttribute("patient", new Patient());
         temp.setUrl("http://localhost:8080/api/patients/"+id);
         model.addAttribute("patientresource",temp.convertPatient());
+        
         return "patientform";
     }
 
