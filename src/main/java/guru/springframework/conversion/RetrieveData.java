@@ -7,6 +7,9 @@ public class RetrieveData {
     private String url;
 
     private PatientConversion patientConversion = new PatientConversion();
+    private QuestionnaireResponseConversion questionnaireResponseConversion = new QuestionnaireResponseConversion();
+    private ProcedureConversion procedureConversion = new ProcedureConversion();
+    private QuestionnaireConversion questionnaireConversion = new QuestionnaireConversion();
 
     public RetrieveData(String url){
         this.url=url;
@@ -49,17 +52,45 @@ public class RetrieveData {
             return "no information";
         }
 
-        String answer;
-        Boolean isArray = urlCheck(url);
-
-        if (isArray) {
-            answer = patientConversion.conversionArray(response.getBody());
-        } else {
-            answer = patientConversion.conversionArray(response.getBody());
-        }
+        String answer = patientConversion.conversionArray(response.getBody());
         return answer;
-
     }
+
+
+
+    public String convertQuestionnnaireResponse(){
+        ResponseEntity<String> response = getResponse(url);
+        if (response == null){
+            return "no information";
+        }
+
+        String answer = questionnaireResponseConversion.conversionArray(response.getBody());
+        return answer;
+    }
+
+
+    public String convertQuestionnnaire(){
+        ResponseEntity<String> response = getResponse(url);
+        if (response == null){
+            return "no information";
+        }
+
+        String answer = questionnaireConversion.conversionArray(response.getBody());
+        return answer;
+    }
+
+
+    public String convertProcedure(){
+        ResponseEntity<String> response = getResponse(url);
+        if (response == null){
+            return "no information";
+        }
+
+        String answer = procedureConversion.conversionArray(response.getBody());
+        return answer;
+    }
+
+
 //    public String ConvertResponse() {
 //        RestTemplate restTemplate = new RestTemplate();
 //        ResponseEntity<String> response;

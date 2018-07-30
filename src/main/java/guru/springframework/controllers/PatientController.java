@@ -21,8 +21,10 @@ import java.util.Map;
 public class PatientController {
     private PatientConversion patientConversion;
     private RetrieveData temp = new RetrieveData();
-    private String defaultUrl="http://localhost:8080/api/search/patients?";
 
+    private String defaultUrl="http://localhost:8080/api/patients?";
+    private String getAllUrl="http://localhost:8080/api/patients";
+    private String queryUrl = "";
     public void setPatientConversion(PatientConversion patientConversion) {
         this.patientConversion = patientConversion;
     }

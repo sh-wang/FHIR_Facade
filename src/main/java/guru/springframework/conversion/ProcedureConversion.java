@@ -14,42 +14,56 @@ public class ProcedureConversion {
     private FhirContext ctx = FhirContext.forDstu3();
     private IParser p =ctx.newJsonParser().setPrettyPrint(true);
 
-    public String conversionSingle(String rawData) throws JSONException {
-        JSONObject jsonObject = new JSONObject(rawData);
+    public String conversionSingle(String rawData){
+        try {
+            JSONObject jsonObject = new JSONObject(rawData);
 
-        Procedure procedure = procedureConversion(jsonObject);
-        String encode = p.encodeResourceToString(procedure);
+            Procedure procedure = procedureConversion(jsonObject);
+            String encode = p.encodeResourceToString(procedure);
 
-        return encode;
-    }
-
-    public String conversionArray(String rawData) throws JSONException {
-        JSONArray jsonArray = new JSONArray(rawData);
-        JSONArray FHIRarray = new JSONArray();;
-
-
-        for(int i = 0; i < jsonArray.length(); i++){
-            FHIRarray.put(new JSONObject(p.encodeResourceToString
-                    (procedureConversion(jsonArray.getJSONObject(i)))));
+            return encode;
+        } catch (JSONException e){
+            e.printStackTrace();
+            return "conversion error";
         }
-
-        return FHIRarray.toString();
     }
 
-    public Procedure procedureConversion(JSONObject jsonObject) throws JSONException {
+    public String conversionArray(String rawData){
+        try {
+            JSONArray jsonArray = new JSONArray(rawData);
+            JSONArray FHIRarray = new JSONArray();;
+
+
+            for(int i = 0; i < jsonArray.length(); i++){
+                FHIRarray.put(new JSONObject(p.encodeResourceToString
+                        (procedureConversion(jsonArray.getJSONObject(i)))));
+            }
+
+            return FHIRarray.toString();
+        }catch (JSONException e){
+            e.printStackTrace();
+            return "conversion error";
+        }
+    }
+
+    public Procedure procedureConversion(JSONObject jsonObject){
         Procedure procedure = new Procedure();
-        //add id
-        procedure.setId(jsonObject.get("id").toString());
+        try{
+            //add id
+            procedure.setId(jsonObject.get("id").toString());
 
-        //currently no status data
-        procedure.setStatus(Procedure.ProcedureStatus.UNKNOWN);
+            //currently no status data
+            procedure.setStatus(Procedure.ProcedureStatus.UNKNOWN);
 
-        CodeableConcept codeableConcept = new CodeableConcept();
+            CodeableConcept codeableConcept = new CodeableConcept();
 
-        //add localcode as code and add name
-        codeableConcept.addCoding().setCode(jsonObject.get("localCode").toString()).
-                setDisplay(jsonObject.get("name").toString().substring(1, jsonObject.get("name").toString().length()));
-        procedure.setCode(codeableConcept);
+            //add localcode as code and add name
+            codeableConcept.addCoding().setCode(jsonObject.get("localCode").toString()).
+                    setDisplay(jsonObject.get("name").toString().substring(1, jsonObject.get("name").toString().length()));
+            procedure.setCode(codeableConcept);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
 
         return  procedure;
     }
