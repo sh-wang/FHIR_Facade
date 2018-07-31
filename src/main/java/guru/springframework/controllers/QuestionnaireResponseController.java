@@ -12,6 +12,7 @@ public class QuestionnaireResponseController {
     private QuestionnaireResponseConversion questionnaireResponseConversion;
 
     private String defaultUrl="http://localhost:8080/api/search/Questionnaire-response?";
+    private String allUrl="http://localhost:8080/api/search/Questionnaire-response";
     private RetrieveData temp = new RetrieveData();
 
     public void setQuestionnaireResponseConversion(QuestionnaireResponseConversion questionnaireResponseConversion) {
@@ -19,7 +20,7 @@ public class QuestionnaireResponseController {
     }
 
     @RequestMapping("/questionnaireresponse")
-    public String newProduct(Model model, Integer identifier
+    public String searchQuestionanireResponse(Model model, Integer identifier
                             , String parent,
                              String questionnaire, String status,
                              String patient, String subject,
@@ -56,6 +57,17 @@ public class QuestionnaireResponseController {
         url= url.substring(0,url.length()-1);
         System.out.println(url);
 //
+        temp.setUrl(url);
+        System.out.println(temp.convertQuestionnnaireResponse());
+        model.addAttribute("qrsource",temp.convertQuestionnnaireResponse());
+        return "qrgetit";
+    }
+
+    @RequestMapping("/questionnaireresponse/all")
+    public String getAll(Model model){
+        System.out.println("iiiiiiiiii");
+        String url = allUrl;
+        model.addAttribute("qr", new QuestionnaireResponse());
         temp.setUrl(url);
         System.out.println(temp.convertQuestionnnaireResponse());
         model.addAttribute("qrsource",temp.convertQuestionnnaireResponse());
