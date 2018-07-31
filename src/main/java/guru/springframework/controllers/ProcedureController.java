@@ -22,7 +22,7 @@ public class ProcedureController {
         model.addAttribute("procedure", new Procedure());
 
         if (id == null){
-            model.addAttribute("procedureresource","[]");
+            model.addAttribute("procedureresource","no information");
             return "procedureform";
         }
         String url = getUrl+id;

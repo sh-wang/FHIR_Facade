@@ -58,7 +58,7 @@ public class PatientController {
         }
 
         if (isNull){
-            model.addAttribute("patientresource","[]");
+            model.addAttribute("patientresource","no information");
             return "patientform";
         }
         url= url.substring(0,url.length()-1);

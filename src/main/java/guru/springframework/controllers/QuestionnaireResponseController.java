@@ -63,14 +63,13 @@ public class QuestionnaireResponseController {
         }
 
         if (isNull){
-            model.addAttribute("qrsource","[]");
+            model.addAttribute("qrsource","no information");
             return "qrgetit";
         }
         url= url.substring(0,url.length()-1);
         System.out.println(url);
 //
         temp.setUrl(url);
-        System.out.println(temp.convertQuestionnnaireResponse());
         model.addAttribute("qrsource",temp.convertQuestionnnaireResponse());
         return "qrgetit";
     }

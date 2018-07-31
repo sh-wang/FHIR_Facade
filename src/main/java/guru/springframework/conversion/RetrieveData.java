@@ -48,7 +48,7 @@ public class RetrieveData {
 
     public String convertPatient(){
         ResponseEntity<String> response = getResponse(url);
-        if (response == null){
+        if (response.getBody().equals("[ ]")){
             return "no information";
         }
 
@@ -57,10 +57,9 @@ public class RetrieveData {
     }
 
 
-
     public String convertQuestionnnaireResponse(){
         ResponseEntity<String> response = getResponse(url);
-        if (response == null){
+        if (response.getBody().equals("[ ]")){
             return "no information";
         }
 

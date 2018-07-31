@@ -22,7 +22,7 @@ public class QuestionnaireController {
         model.addAttribute("questionnaire", new Questionnaire());
 
         if (id == null){
-            model.addAttribute("questionnaireresource","[]");
+            model.addAttribute("questionnaireresource","no information");
             return "questionnaireform";
         }
         String url = getUrl+id;
