@@ -77,7 +77,7 @@ public class QuestionnaireResponseController {
 
     @RequestMapping("/questionnaireresponse/all")
     public String getAll(Model model){
-        System.out.println("iiiiiiiiii");
+//        System.out.println("iiiiiiiiii");
         String url = allUrl;
         model.addAttribute("qr", new QuestionnaireResponse());
         temp.setUrl(url);

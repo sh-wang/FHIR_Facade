@@ -1,6 +1,7 @@
 package guru.springframework.controllers;
 
 
+import guru.springframework.domain.QuestionnaireResponse;
 import org.springframework.stereotype.Controller;
 import guru.springframework.domain.Patient;
 import guru.springframework.conversion.PatientConversion;
@@ -15,7 +16,6 @@ public class PatientController {
 
     private String defaultUrl="http://localhost:8080/api/search/patients?";
     private String getAllUrl="http://localhost:8080/api/patients";
-    private String queryUrl = "";
     public void setPatientConversion(PatientConversion patientConversion) {
         this.patientConversion = patientConversion;
     }
@@ -67,6 +67,16 @@ public class PatientController {
         temp.setUrl(url);
         model.addAttribute("patientresource",temp.convertPatient());
 
+        return "patientform";
+    }
+
+    @RequestMapping("/patient/all")
+    public String getAll(Model model){
+        String url = getAllUrl;
+        model.addAttribute("pat", new Patient());
+        temp.setUrl(url);
+        System.out.println(temp.convertPatient());
+        model.addAttribute("patientresource",temp.convertPatient());
         return "patientform";
     }
 
