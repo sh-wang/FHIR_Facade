@@ -65,14 +65,14 @@ public class QuestionnaireResponseController {
 
         if (isNull){
             model.addAttribute("qrsource","no information");
-            return "qrgetit";
+            return "qrform";
         }
         url= url.substring(0,url.length()-1);
         System.out.println(url);
 //
         temp.setUrl(url);
         model.addAttribute("qrsource",temp.convertQuestionnnaireResponse());
-        return "qrgetit";
+        return "qrform";
     }
 
     @RequestMapping("/questionnaireresponse/all")
@@ -83,6 +83,6 @@ public class QuestionnaireResponseController {
         temp.setUrl(url);
         System.out.println(temp.convertQuestionnnaireResponse());
         model.addAttribute("qrsource",temp.convertQuestionnnaireResponse());
-        return "qrgetit";
+        return "qrform";
     }
 }
