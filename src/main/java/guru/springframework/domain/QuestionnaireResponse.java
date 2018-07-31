@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class QuestionnaireResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String identifier;
+    private Integer identifier;
     private String parent;
     private String questionnaire;
     private String status;
@@ -16,11 +16,11 @@ public class QuestionnaireResponse {
     private String authored;
     private String author;
 
-    public String getIdentifier() {
+    public Integer getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(String identifier) {
+    public void setIdentifier(Integer identifier) {
         this.identifier = identifier;
     }
 

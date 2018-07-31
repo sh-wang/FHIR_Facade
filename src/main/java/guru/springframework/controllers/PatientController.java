@@ -1,8 +1,8 @@
 package guru.springframework.controllers;
 
 
-import guru.springframework.domain.Patient;
 import org.springframework.stereotype.Controller;
+import guru.springframework.domain.Patient;
 import guru.springframework.conversion.PatientConversion;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +22,8 @@ public class PatientController {
 
 
     @RequestMapping("/patient")
-    public String newProduct(Model model, String birthdate, String email, String family, String gender, String given, String identifier, String name){
+    public String searchPatient(Model model, String birthdate, String email, String family, String gender, String given, String identifier, String name){
         model.addAttribute("patient", new Patient());
-        System.out.println(birthdate);
 
         String url = defaultUrl;
         if(birthdate != null && !birthdate.equals("")){
@@ -55,7 +54,7 @@ public class PatientController {
 
         temp.setUrl(url);
         model.addAttribute("patientresource",temp.convertPatient());
-        
+
         return "patientform";
     }
 
