@@ -9,18 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ProcedureController {
-    private ProcedureConversion procedureConversion;
+//    private ProcedureConversion procedureConversion;
     private RetrieveData temp = new RetrieveData();
-
     private String getUrl="http://localhost:8080/api/procedures/";
 
-    public void setProcedureConversion(ProcedureConversion procedureConversion){
-        this.procedureConversion = procedureConversion;
-    }
+//    public void setProcedureConversion(ProcedureConversion procedureConversion){
+//        this.procedureConversion = procedureConversion;
+//    }
 
     @RequestMapping("/procedure")
     public String searchQuestionnaires(Model model, Integer id){
         model.addAttribute("procedure", new Procedure());
+
+        if (id == null){
+            model.addAttribute("procedureresource","[]");
+            return "procedureform";
+        }
         String url = getUrl+id;
         System.out.println(url);
         temp.setUrl(url);
