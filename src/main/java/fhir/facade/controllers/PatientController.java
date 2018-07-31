@@ -75,6 +75,7 @@ public class PatientController {
         model.addAttribute("patient", new Patient());
         temp.setUrl(url);
         model.addAttribute("patientinfo",temp.convertPatient());
+
         return "patientform";
     }
 
