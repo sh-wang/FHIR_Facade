@@ -72,9 +72,8 @@ public class PatientController {
     @RequestMapping("/patient/all")
     public String getAll(Model model){
         String url = getAllUrl;
-        model.addAttribute("pat", new Patient());
+        model.addAttribute("patient", new Patient());
         temp.setUrl(url);
-        System.out.println(temp.convertPatient());
         model.addAttribute("patientresource",temp.convertPatient());
         return "patientform";
     }
