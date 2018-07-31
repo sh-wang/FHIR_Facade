@@ -5,24 +5,15 @@ import org.springframework.stereotype.Controller;
 import guru.springframework.domain.Patient;
 import guru.springframework.conversion.PatientConversion;
 import org.springframework.ui.Model;
-import guru.springframework.conversion.PatientConversion;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import guru.springframework.conversion.RetrieveData;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class PatientController {
     private PatientConversion patientConversion;
     private RetrieveData temp = new RetrieveData();
 
-    private String defaultUrl="http://localhost:8080/api/patients?";
+    private String defaultUrl="http://localhost:8080/api/search/patients?";
     private String getAllUrl="http://localhost:8080/api/patients";
     private String queryUrl = "";
     public void setPatientConversion(PatientConversion patientConversion) {
@@ -35,43 +26,26 @@ public class PatientController {
         model.addAttribute("patient", new Patient());
         System.out.println(birthdate);
 
-//        String url = defaultUrl+ "birthdate="+birthdate+"&"+"email="+email+"&"+"family="+family+"&"+"gender="+gender+"&"+"given="+given+"&"+"identifier="+identifier+"&"+"name="+name;
-//        System.out.println(url);
-//        Map<String, String> params = new HashMap();
-//        params.put("birthdate",birthdate);
-//        params.put("email",email);
-//        params.put("family",family);
-//        params.put("gender",gender);
-//        params.put("given",given);
-//        params.put("identifier",identifier);
-//        params.put("name",name);
-
-//        for(Map.Entry<String, String> entry : params.entrySet()){
-//            if (entry!=null){
-//                System.out.println("key: "+entry.getKey() + "   value:"+entry.getValue());
-//                defaultUrl = defaultUrl + entry.getKey()+"="+entry.getValue()+"&";
-//            }
-//        }
         String url = defaultUrl;
-        if(birthdate!=null){
+        if(birthdate != null && !birthdate.equals("")){
             url = url+"birthdate="+birthdate+"&";
         }
-        else if (email!=null){
+        if (email != null && !email.equals("")){
             url = url+"email="+email+"&";
         }
-        else if (family!=null){
+        if (family != null && !family.equals("")){
             url = url+"family="+family+"&";
         }
-        else if (gender!=null){
+        if (gender != null && !gender.equals("")){
             url = url+"gender="+gender+"&";
         }
-        else if (given!=null){
+        if (given != null && !given.equals("")){
             url = url+"given="+given+"&";
         }
-        else if (identifier !=null){
+        if (identifier != null && !identifier.equals("")){
             url = url+"identifier="+identifier+"&";
         }
-        else if (name!=null){
+        if (name != null && !name.equals("")){
             url = url+"name="+name+"&";
         }
 

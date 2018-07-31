@@ -43,7 +43,7 @@ public class QuestionnaireConversion {
                         (questionnaireConversion(jsonArray.getJSONObject(i)))));
             }
 
-            return FHIRarray.toString();
+            return FHIRarray.toString(4);
         } catch (JSONException e){
             e.printStackTrace();
             return "conversion error";
