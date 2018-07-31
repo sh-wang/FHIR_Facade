@@ -25,35 +25,48 @@ public class QuestionnaireResponseController {
                              String questionnaire, String status,
                              String patient, String subject,
                              String authored, String author){
+        model.addAttribute("qr", new QuestionnaireResponse());
 
         String url=defaultUrl;
-        model.addAttribute("qr", new QuestionnaireResponse());
-        System.out.println("parent:"+parent);
+        Boolean isNull = true;
+
         if(status!=null && !status.equals("")){
             url += "status="+status+"&";
+            isNull = false;
         }
         if(parent!=null && !parent.equals("")){
             url += "parent="+parent+"&";
+            isNull = false;
         }
         if(identifier!=null && !identifier.equals("")){
             url += "identifier="+identifier+"&";
+            isNull = false;
         }
         if(questionnaire!=null && !questionnaire.equals("")){
             url += "questionnaire="+questionnaire+"&";
+            isNull = false;
         }
         if(patient!=null && !patient.equals("")){
             url += "patient="+patient+"&";
+            isNull = false;
         }
         if(subject!=null &&  !subject.equals("")){
             url += "subject="+subject+"&";
+            isNull = false;
         }
         if(authored!=null && !authored.equals("")){
             url += "authored="+authored+"&";
+            isNull = false;
         }
         if(author!=null && !author.equals("")){
             url += "author="+author+"&";
+            isNull = false;
         }
 
+        if (isNull){
+            model.addAttribute("qrsource","[]");
+            return "qrgetit";
+        }
         url= url.substring(0,url.length()-1);
         System.out.println(url);
 //
