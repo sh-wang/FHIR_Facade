@@ -1,4 +1,4 @@
-package guru.springframework.configuration;
+package fhir.facade.configuration;
 
 import org.h2.server.web.WebServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;

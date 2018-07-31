@@ -1,4 +1,4 @@
-package guru.springframework.configuration;
+package fhir.facade.configuration;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

@@ -1,12 +1,12 @@
-package guru.springframework.controllers;
+package fhir.facade.controllers;
 
 
+import fhir.facade.conversion.PatientConversion;
+import fhir.facade.conversion.RetrieveData;
+import fhir.facade.domain.Patient;
 import org.springframework.stereotype.Controller;
-import guru.springframework.domain.Patient;
-import guru.springframework.conversion.PatientConversion;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import guru.springframework.conversion.RetrieveData;
 
 @Controller
 public class PatientController {
@@ -64,18 +64,17 @@ public class PatientController {
         System.out.println(url);
 
         temp.setUrl(url);
-        model.addAttribute("patientresource",temp.convertPatient());
+        model.addAttribute("patientinfo",temp.convertPatient());
 
         return "patientform";
     }
 
     @RequestMapping("/patient/all")
-    public String getAll(Model model){
+    public String getAllPatient(Model model){
         String url = getAllUrl;
-        model.addAttribute("pat", new Patient());
+        model.addAttribute("patient", new Patient());
         temp.setUrl(url);
-        System.out.println(temp.convertPatient());
-        model.addAttribute("patientresource",temp.convertPatient());
+        model.addAttribute("patientinfo",temp.convertPatient());
         return "patientform";
     }
 

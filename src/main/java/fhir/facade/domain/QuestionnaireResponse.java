@@ -1,4 +1,4 @@
-package guru.springframework.domain;
+package fhir.facade.domain;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

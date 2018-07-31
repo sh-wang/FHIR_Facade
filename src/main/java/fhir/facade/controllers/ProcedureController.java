@@ -1,8 +1,7 @@
-package guru.springframework.controllers;
+package fhir.facade.controllers;
 
-import guru.springframework.conversion.ProcedureConversion;
-import guru.springframework.conversion.RetrieveData;
-import guru.springframework.domain.Procedure;
+import fhir.facade.domain.Procedure;
+import fhir.facade.conversion.RetrieveData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
