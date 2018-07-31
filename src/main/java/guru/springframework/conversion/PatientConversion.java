@@ -44,7 +44,7 @@ public class PatientConversion {
                 FHIRarray.put(new JSONObject(p.encodeResourceToString
                         (patientConversion(jsonArray.getJSONObject(i)))));
             }
-            return FHIRarray.toString();
+            return FHIRarray.toString(4);
         }catch (JSONException e){
             e.printStackTrace();
             return "conversion error";
