@@ -60,19 +60,19 @@ public class QuestionnaireResponseConversion {
             questionnaireResponse.setId(jsonObject.get("id").toString());
 
             //add status
-            if (jsonObject.get("status").equals("started")){
+            if (jsonObject.get("status").equals("STARTED")){
                 questionnaireResponse.setStatus(QuestionnaireResponse.QuestionnaireResponseStatus.INPROGRESS);
             }
-            if (jsonObject.get("status").equals("uninitialised")){
+            if (jsonObject.get("status").equals("UNINITIALISED")){
                 questionnaireResponse.setStatus(QuestionnaireResponse.QuestionnaireResponseStatus.NULL);
             }
-            if (jsonObject.get("status").equals("completed")){
+            if (jsonObject.get("status").equals("COMPLETED")){
                 questionnaireResponse.setStatus(QuestionnaireResponse.QuestionnaireResponseStatus.COMPLETED);
             }
-            if (jsonObject.get("status").equals("unknown")){
+            if (jsonObject.get("status").equals("UNKNOWN")){
                 questionnaireResponse.setStatus(QuestionnaireResponse.QuestionnaireResponseStatus.NULL);
             }
-            if (jsonObject.get("status").equals("pending")){
+            if (jsonObject.get("status").equals("PENDING")){
                 questionnaireResponse.setStatus(QuestionnaireResponse.QuestionnaireResponseStatus.INPROGRESS);
             }
 

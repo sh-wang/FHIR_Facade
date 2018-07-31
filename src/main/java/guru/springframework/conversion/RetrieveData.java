@@ -64,7 +64,7 @@ public class RetrieveData {
             return "no information";
         }
 
-        String answer = questionnaireResponseConversion.conversionSingle(response.getBody());
+        String answer = questionnaireResponseConversion.conversionArray(response.getBody());
         return answer;
     }
 

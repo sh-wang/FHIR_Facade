@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class QuestionnaireResponseController {
     private QuestionnaireResponseConversion questionnaireResponseConversion;
 
-
+    private String defaultUrl="http://localhost:8080/api/search/Questionnaire-response?";
     private RetrieveData temp = new RetrieveData();
 
     public void setQuestionnaireResponseConversion(QuestionnaireResponseConversion questionnaireResponseConversion) {
@@ -25,38 +25,38 @@ public class QuestionnaireResponseController {
                              String patient, String subject,
                              String authored, String author){
 
-        String defaultUrl="http://localhost:8080/api/Questionnaire-response?";
+        String url=defaultUrl;
         model.addAttribute("qr", new QuestionnaireResponse());
         System.out.println("parent:"+parent);
-        if(status!=null && !status.equals(",") && !status.equals("")){
-            defaultUrl += "status="+status+"&";
+        if(status!=null && !status.equals("")){
+            url += "status="+status+"&";
         }
-        if(parent!=null && !parent.equals(",") && !parent.equals("")){
-            defaultUrl += "parent="+parent+"&";
+        if(parent!=null && !parent.equals("")){
+            url += "parent="+parent+"&";
         }
-        if(identifier!=null && !identifier.equals(",") && !identifier.equals("")){
-            defaultUrl += "identifier="+identifier+"&";
+        if(identifier!=null && !identifier.equals("")){
+            url += "identifier="+identifier+"&";
         }
-        if(questionnaire!=null && !questionnaire.equals(",") && !questionnaire.equals("")){
-            defaultUrl += "questionnaire="+questionnaire+"&";
+        if(questionnaire!=null && !questionnaire.equals("")){
+            url += "questionnaire="+questionnaire+"&";
         }
-        if(patient!=null && !patient.equals(",")&& !patient.equals("")){
-            defaultUrl += "patient="+patient+"&";
+        if(patient!=null && !patient.equals("")){
+            url += "patient="+patient+"&";
         }
-        if(subject!=null && !subject.equals(",") && !subject.equals("")){
-            defaultUrl += "subject="+subject+"&";
+        if(subject!=null &&  !subject.equals("")){
+            url += "subject="+subject+"&";
         }
-        if(authored!=null && !authored.equals(",")&& !authored.equals("")){
-            defaultUrl += "authored="+authored+"&";
+        if(authored!=null && !authored.equals("")){
+            url += "authored="+authored+"&";
         }
-        if(author!=null && !author.equals(",")&& !author.equals("")){
-            defaultUrl += "author="+author+"&";
+        if(author!=null && !author.equals("")){
+            url += "author="+author+"&";
         }
 
-        defaultUrl= defaultUrl.substring(0,defaultUrl.length()-1);
-        System.out.println(defaultUrl);
+        url= url.substring(0,url.length()-1);
+        System.out.println(url);
 //
-        temp.setUrl(defaultUrl);
+        temp.setUrl(url);
         System.out.println(temp.convertQuestionnnaireResponse());
         model.addAttribute("qrsource",temp.convertQuestionnnaireResponse());
         return "qrgetit";
